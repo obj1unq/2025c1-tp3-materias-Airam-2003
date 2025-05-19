@@ -205,3 +205,5 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":196,"timestamp":"2025-05-19T21:59:50.165Z"}
 {"level":"info","message":"⌛ Validating estudiantes.wlk","timeElapsed":121,"timestamp":"2025-05-19T21:59:50.295Z"}
 {"level":"info","message":"🧪 Test runner executed on c:\\Users\\julia\\OneDrive\\Desktop\\Repositorios\\2025c1-tp3-materias-Airam-2003","result":{"errored":0,"failed":0,"ok":6},"testsFailed":[],"timeElapsed":1760,"timestamp":"2025-05-19T21:59:59.798Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":175,"timestamp":"2025-05-19T22:00:01.144Z"}
+{"level":"info","message":"⌛ Validating sistemaInscripcion.wlk","timeElapsed":170,"timestamp":"2025-05-19T22:00:01.316Z"}

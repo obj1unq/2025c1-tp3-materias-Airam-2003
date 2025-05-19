@@ -27,9 +27,13 @@ class Materia {
     alumnosInscriptos.remove(alumno)
   }
   
+  method alumnoPrioritario() = listaDeEspera.head()
+  
+  
+
   method darLugarAlPrimeroEnEspera() {
-    self.inscribirAlumno(listaDeEspera.head())
-    listaDeEspera.remove(listaDeEspera.head())
+    self.inscribirAlumno(self.alumnoPrioritario())
+    listaDeEspera.remove(self.alumnoPrioritario())
   }
 }
 
