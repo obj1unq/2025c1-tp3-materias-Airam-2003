@@ -29,8 +29,6 @@ class Materia {
   
   method alumnoPrioritario() = listaDeEspera.head()
   
-  
-
   method darLugarAlPrimeroEnEspera() {
     self.inscribirAlumno(self.alumnoPrioritario())
     listaDeEspera.remove(self.alumnoPrioritario())
@@ -47,7 +45,9 @@ const objetos2 = new Materia(requisitos = #{objetos1, matematica1})
 
 const objetos3 = new Materia(requisitos = #{objetos2, basesDeDatos})
 
-const programacionConcurrente = new Materia(requisitos = #{objetos1, basesDeDatos})
+const programacionConcurrente = new Materia(
+  requisitos = #{objetos1, basesDeDatos}
+)
 
 const trabajoFinal = new Materia()
 
