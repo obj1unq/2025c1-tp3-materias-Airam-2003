@@ -1,0 +1,73 @@
+import aprobadas.*
+import materias.*
+import carreras.*
+import estudiantes.*
+import sistemaInscripcion.*
+
+describe "Situaciones de prueba" {
+  const roque = new Estudiante(carreras = #{programacion, medicina})
+  const luisa = new Estudiante(carreras = #{programacion})
+  const romina = new Estudiante(carreras = #{programacion})
+  const alicia = new Estudiante(carreras = #{programacion})
+  const ana = new Estudiante(carreras = #{programacion})
+  
+  method initialize(){
+    sistemaInscripciones.registrarAprobada(roque,elemDeProgramacion,8)
+    sistemaInscripciones.registrarAprobada(roque,matematica1,8)
+    sistemaInscripciones.registrarAprobada(roque,objetos1,9)
+    sistemaInscripciones.registrarAprobada(roque,basesDeDatos,5)
+    sistemaInscripciones.registrarAprobada(roque,quimica,7)
+    sistemaInscripciones.registrarAprobada(roque,biologia1,8)
+
+    sistemaInscripciones.registrarAprobada(luisa,elemDeProgramacion,6)
+    sistemaInscripciones.registrarAprobada(luisa,matematica1,5)
+    sistemaInscripciones.registrarAprobada(luisa,objetos1,7)
+
+    sistemaInscripciones.registrarAprobada(romina,elemDeProgramacion,8)
+    sistemaInscripciones.registrarAprobada(romina,matematica1,4)
+    sistemaInscripciones.registrarAprobada(romina,objetos1,5)
+
+    sistemaInscripciones.registrarAprobada(alicia,elemDeProgramacion,4)
+    sistemaInscripciones.registrarAprobada(alicia,matematica1,6)
+    sistemaInscripciones.registrarAprobada(alicia,objetos1,7)
+
+    sistemaInscripciones.registrarAprobada(ana,elemDeProgramacion,7)
+  }
+
+  test "Roque puede inscribirse en Objetos 2" {
+    assert.that(sistemaInscripciones.puedeInscribirseA(roque, objetos2))
+  }
+
+  test "Roque no puede inscribirse en Objetos 1" {
+    assert.notThat(sistemaInscripciones.puedeInscribirseA(roque, objetos1))
+  }
+
+  test "Tampoco puede inscribirse en Objetos 3" {
+    assert.notThat(sistemaInscripciones.puedeInscribirseA(roque, objetos3))
+  }
+
+  test "Roque puede inscribirse en varias materias" {
+    assert.that(sistemaInscripciones.puedeInscribirseA(roque, objetos2))
+    assert.that(sistemaInscripciones.puedeInscribirseA(roque, programacionConcurrente))
+    assert.that(sistemaInscripciones.puedeInscribirseA(roque, biologia2))
+  }
+
+  test "Inscripciones a Objetos 2" {
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(luisa, objetos2)
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(romina, objetos2)
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(alicia, objetos2)
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(roque, objetos2)
+    assert.equals(#{luisa,romina,alicia}, objetos2.alumnosInscriptos())
+    assert.equals([roque], objetos2.listaDeEspera())
+  }
+
+  test "Romina se da de baja" {
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(luisa, objetos2)
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(romina, objetos2)
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(alicia, objetos2)
+    sistemaInscripciones.inscribirAlumnoAUnaMateria(roque, objetos2)
+    sistemaInscripciones.darDeBajaEnMateria(romina, objetos2)
+    assert.equals(#{luisa,alicia,roque}, objetos2.alumnosInscriptos())
+    assert.that(objetos2.listaDeEspera().isEmpty())
+  }
+}
