@@ -21,7 +21,7 @@ object sistemaInscripciones {
   }
   
   method yaAproboLaMateria(alumno, materia) = alumno.materiasAprobadas().any(
-    { aprobada => aprobada.queMateria(materia)}
+    { aprobada => aprobada.queMateria(materia) }
   )
   
   method promedio(alumno) {
@@ -37,9 +37,14 @@ object sistemaInscripciones {
     { acum, each => each.materiasDeLaCarrera().union(acum) }
   )
   
-  method puedeInscribirseA(alumno, materia) = ((self.materiasDeTodasLasCarreras(
+  method alumnoDebeAprobar(alumno, materia) = self.materiasDeTodasLasCarreras(
     alumno
-  ).contains(materia) && (not self.yaAproboLaMateria(
+  ).contains(materia)
+  
+  method puedeInscribirseA(alumno, materia) = ((self.alumnoDebeAprobar(
+    alumno,
+    materia
+  ) && (not self.yaAproboLaMateria(
     alumno,
     materia
   ))) && (not materia.estaInscriptoEsteAlumno(
