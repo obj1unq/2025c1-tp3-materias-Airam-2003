@@ -21,7 +21,7 @@ object sistemaInscripciones {
   }
   
   method yaAproboLaMateria(alumno, materia) = alumno.materiasAprobadas().any(
-    { mat => mat.materiaAprobada() == materia }
+    { aprobada => aprobada.queMateria(materia)}
   )
   
   method promedio(alumno) {
