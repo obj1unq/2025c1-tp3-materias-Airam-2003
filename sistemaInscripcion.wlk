@@ -5,7 +5,7 @@ import estudiantes.*
 
 object sistemaInscripciones {
   method verificarAprobada(alumno, materia) {
-    if (self.yaAproboLaMateria(alumno, materia)) self.error(
+    if (alumno.yaAproboLaMateria(materia)) self.error(
         "ERROR: Este alumno ya tiene esa materia aprobada"
       )
   }
@@ -19,11 +19,7 @@ object sistemaInscripciones {
     )
     alumno.agregarMateriaAprobada(materiaAprobada)
   }
-  
-  method yaAproboLaMateria(alumno, materia) = alumno.materiasAprobadas().any(
-    { aprobada => aprobada.queMateria(materia) }
-  )
-  
+
   method promedio(alumno) {
     if (alumno.materiasAprobadas().isEmpty()) {
       return 0
@@ -37,15 +33,12 @@ object sistemaInscripciones {
     { acum, each => each.materiasDeLaCarrera().union(acum) }
   )
   
-  method alumnoDebeAprobar(alumno, materia) = self.materiasDeTodasLasCarreras(
-    alumno
-  ).contains(materia)
+  method alumnoDebeAprobar(alumno, materia) = self.materiasDeTodasLasCarreras(alumno).contains(materia)
   
   method puedeInscribirseA(alumno, materia) = ((self.alumnoDebeAprobar(
     alumno,
     materia
-  ) && (not self.yaAproboLaMateria(
-    alumno,
+  ) && (not alumno.yaAproboLaMateria(
     materia
   ))) && (not materia.estaInscriptoEsteAlumno(
     alumno

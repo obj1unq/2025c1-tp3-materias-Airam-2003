@@ -8,13 +8,17 @@ class Estudiante {
     materiasAprobadas.add(aprobada)
   }
 
-  method nombresDeLasAprobadas() {
+  method yaAproboLaMateria(materia) {
+    materiasAprobadas.any({aprobada => aprobada.queMateria(materia)})
+  }
+
+  method nombresDeMateriasAprobadas() {
     return materiasAprobadas.map({aprobada => aprobada.materiaAprobada()})
   }
 
   method cumpleLosRequisitosParaCursar(
     materia
 ) = materia.requisitos().intersection(
-    self.nombresDeLasAprobadas()
+    self.nombresDeMateriasAprobadas()
   ) == materia.requisitos()
 }
