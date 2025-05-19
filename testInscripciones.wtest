@@ -57,8 +57,8 @@ describe "Situaciones de prueba" {
     sistemaInscripciones.inscribirAlumnoAUnaMateria(romina, objetos2)
     sistemaInscripciones.inscribirAlumnoAUnaMateria(alicia, objetos2)
     sistemaInscripciones.inscribirAlumnoAUnaMateria(roque, objetos2)
-    assert.that(objetos2.alumnosInscriptos() == #{luisa,romina,alicia})
-    assert.that(objetos2.listaDeEspera() == [roque])
+    assert.equals(#{luisa,romina,alicia}, objetos2.alumnosInscriptos())
+    assert.equals([roque], objetos2.listaDeEspera())
   }
 
   test "Romina se da de baja" {
@@ -67,7 +67,7 @@ describe "Situaciones de prueba" {
     sistemaInscripciones.inscribirAlumnoAUnaMateria(alicia, objetos2)
     sistemaInscripciones.inscribirAlumnoAUnaMateria(roque, objetos2)
     sistemaInscripciones.darDeBajaEnMateria(romina, objetos2)
-    assert.that(objetos2.alumnosInscriptos() == #{luisa,alicia,roque})
+    assert.equals(#{luisa,alicia,roque}, objetos2.alumnosInscriptos())
     assert.that(objetos2.listaDeEspera().isEmpty())
   }
 }
