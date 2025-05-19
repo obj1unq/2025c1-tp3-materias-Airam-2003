@@ -19,7 +19,7 @@ object sistemaInscripciones {
     )
     alumno.agregarMateriaAprobada(materiaAprobada)
   }
-
+  
   method promedio(alumno) {
     if (alumno.materiasAprobadas().isEmpty()) {
       return 0
@@ -33,7 +33,9 @@ object sistemaInscripciones {
     { acum, each => each.materiasDeLaCarrera().union(acum) }
   )
   
-  method alumnoDebeAprobar(alumno, materia) = self.materiasDeTodasLasCarreras(alumno).contains(materia)
+  method alumnoDebeAprobar(alumno, materia) = self.materiasDeTodasLasCarreras(
+    alumno
+  ).contains(materia)
   
   method puedeInscribirseA(alumno, materia) = ((self.alumnoDebeAprobar(
     alumno,
